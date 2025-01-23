@@ -1,0 +1,9 @@
+<div class="message-box flex-col py-3 big-red-200">
+  @for (b of blurps; track b.source) {
+  <div class="message bg-blue-300"
+    [ngClass]="{'right': b.source === BlurpSenderType.User, 'bg-green-300': b.source === BlurpSenderType.User}">{{
+    b.message }}</div>
+  } @empty {
+  <li>There are no items.</li>
+  }
+</div>

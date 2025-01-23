@@ -1,0 +1,19 @@
+* {
+  border: blue 1px solid;
+}
+
+app-header {
+  position: absolute;
+}
+
+.container {
+  height: calc(100% - 118px);
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+
+app-chatinput,
+app-chatfeed {
+  width: 100%;
+}
