@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Blurp, BlurpSenderType } from './models/message.model';
 
 @Injectable({
@@ -21,26 +21,26 @@ export class MessageService {
   }
 
   initialBlurps: Blurp[] = [
-    {
-        id: 1,
-        source: BlurpSenderType.Bot,
-        message: `Good ${this.getTimeOfDay()}! May I help you?`
-    },
-    {
-        id: 2,
-        source: BlurpSenderType.User,
-        message: 'Hi I need help'
-    },
-    {
-        id: 3,
-        source: BlurpSenderType.Bot,
-        message: 'Sure. What may I help you with?'
-    },
-    {
-        id: 4,
-        source: BlurpSenderType.User,
-        message: 'What is 2 + 2?'
-    },
+    // {
+    //     id: 1,
+    //     source: BlurpSenderType.Bot,
+    //     message: `Good ${this.getTimeOfDay()}! May I help you?`
+    // },
+    // {
+    //     id: 2,
+    //     source: BlurpSenderType.User,
+    //     message: 'Hi I need help'
+    // },
+    // {
+    //     id: 3,
+    //     source: BlurpSenderType.Bot,
+    //     message: 'Sure. What may I help you with?'
+    // },
+    // {
+    //     id: 4,
+    //     source: BlurpSenderType.User,
+    //     message: 'What is 2 + 2?'
+    // },
   ];
 
   public subject$ = new Subject<Blurp>();
@@ -54,4 +54,5 @@ export class MessageService {
       complete: () => console.log('subject$ got a complete notification')
     });
   }
+
 }
