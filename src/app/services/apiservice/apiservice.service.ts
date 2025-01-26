@@ -18,7 +18,6 @@ export class ApiService {
   }
 
   async sendMessage (prompt: string) {
-    // const prompt = "Explain how AI works";
     const result = await this.model.generateContent(prompt);
     return result.response.text();
   }

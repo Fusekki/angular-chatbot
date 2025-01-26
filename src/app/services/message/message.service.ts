@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Blurp, BlurpSenderType } from './models/message.model';
+import { Blurp, BlurpSenderType } from '../../models/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +21,11 @@ export class MessageService {
   }
 
   initialBlurps: Blurp[] = [
-    // {
-    //     id: 1,
-    //     source: BlurpSenderType.Bot,
-    //     message: `Good ${this.getTimeOfDay()}! May I help you?`
-    // },
+    {
+        id: 1,
+        source: BlurpSenderType.Bot,
+        message: `Hi there! How can I help you today?`
+    },
     // {
     //     id: 2,
     //     source: BlurpSenderType.User,

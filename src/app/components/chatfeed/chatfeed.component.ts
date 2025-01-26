@@ -1,7 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Blurp, BlurpSenderType } from '../../models/message.model';
 import { CommonModule } from '@angular/common';
-import { MessageService } from '../../message.service';
+import { MessageService } from '../../services/message/message.service';
 import { timer } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ import { timer } from 'rxjs';
   standalone: true
 })
 export class ChatfeedComponent {
-  @ViewChild('messageBox') messageBox!: HTMLDivElement;
+  @ViewChild('messageBox') messageBox!: ElementRef;
   BlurpSenderType = BlurpSenderType;
   blurps: Blurp[] = []
 
@@ -26,8 +26,10 @@ export class ChatfeedComponent {
         // this.blurps.push(v)
         timer(0).subscribe(t => {
           console.log('here')
-          this.messageBox.scrollTop = this.messageBox.scrollHeight
-          // e.target.scrollTop = e.target.scrollHeight
+          console.log(this.messageBox.nativeElement.scrollTop )
+          this.messageBox.nativeElement.scrollTop = this.messageBox.nativeElement.scrollHeight
+          console.log(this.messageBox.nativeElement.scrollTop )
+          console.log(this.messageBox)
         })
       },
       error: e => console.error(e),

@@ -1,6 +1,6 @@
-<div class="message-box flex-col py-3 big-red-200" #messageBox>
+<div class="message-box flex-col py-3 w-full overflow-y-auto p-0 " #messageBox>
   @for (b of blurps; track b.source) {
-  <div class="message bg-blue-300"
+  <div class="message bg-blue-300 rounded-3xl max-w-90"
     [ngClass]="{'right': b.source === BlurpSenderType.User, 'bg-lime-500': b.source === BlurpSenderType.User}">{{
     b.message }}</div>
   }

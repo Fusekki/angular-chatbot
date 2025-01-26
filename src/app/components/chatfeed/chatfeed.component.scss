@@ -1,24 +1,22 @@
 * {
-  border: red solid 1px;
+  // border: red solid 1px;
 }
 
 .message-box {
-  height: 475px;
-  bottom: 120px;
-  width: 100%;
-  overflow-y: auto;
-  margin-top: 30px;
-}
+  // padding: 0;
+  // width: 100%;
+  // overflow-y: auto;
 
-.message {
-  color: #000 !important;
-  border-radius: 20px;
-  display: block;
-  max-width: 50%;
-  padding: 7px 13px 7px 13px;
-  margin: 5px 0;
-}
+  .message {
+    // color: #000 !important;
+    // border-radius: 20px;
+    // display: block;
+    // max-width: 50%;
+    padding: 7px 13px;
+    margin: 5px 0;
 
-.right {
-  justify-self: right;
+    &.right {
+      justify-self: right;
+    }
+  }
 }
