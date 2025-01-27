@@ -15,21 +15,26 @@ export class ChatfeedComponent {
   @ViewChild('messageBox') messageBox!: ElementRef;
   BlurpSenderType = BlurpSenderType;
   blurps: Blurp[] = []
+  typingAnimation = true;
 
   constructor(private messageService: MessageService) {
     // this.messageService.subject$.subscribe(); // in case we need to update the blurps with an API call to bot.
-    this.blurps = this.messageService.blurps;
-
+    const delay = Math.floor(Math.random() * (2000 - 1000 + 1) + 1000);
+    console.log('delay: ', delay)
+    timer(delay).subscribe(() => {
+      this.typingAnimation = false;
+      this.blurps = this.messageService.blurps;
+    })
     this.messageService.subject$
     .subscribe({
       next: v => {
-        // this.blurps.push(v)
+        this.messageService.blurps.at(-1)?.source === BlurpSenderType.User ? this.typingAnimation = true : this.typingAnimation = false;
         timer(0).subscribe(t => {
-          console.log('here')
-          console.log(this.messageBox.nativeElement.scrollTop )
+          // console.log('here')
+          // console.log(this.messageBox.nativeElement.scrollTop )
           this.messageBox.nativeElement.scrollTop = this.messageBox.nativeElement.scrollHeight
-          console.log(this.messageBox.nativeElement.scrollTop )
-          console.log(this.messageBox)
+          // console.log(this.messageBox.nativeElement.scrollTop )
+          // console.log(this.messageBox)
         })
       },
       error: e => console.error(e),

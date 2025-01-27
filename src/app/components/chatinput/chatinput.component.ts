@@ -44,13 +44,15 @@ export class ChatinputComponent {
 
   async sendMessage(prompt: string) {
     await this.apiService.sendMessage(prompt).then(res => {
-      const newBlurp = {
+      const newBlurp: Blurp = {
         id: this.blurps.length + 1,
         source: BlurpSenderType.Bot,
         message: res
       };
-      console.log(newBlurp)
-      this.messageService.subject$.next(newBlurp)
+      const delay = Math.floor(Math.random() * (5000 - 1000 + 1) + 1000);
+      timer(delay).subscribe(() => {
+        this.messageService.subject$.next(newBlurp)
+      })
     });
   }
 }
