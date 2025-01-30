@@ -1,10 +1,11 @@
 <div class="message-box flex-col py-3 w-full overflow-y-auto p-0" #messageBox>
   @for (b of blurps; track b) {
-  <div class="message bg-blue-300 rounded-3xl max-w-90"
-    [ngClass]="{'right': b.source === BlurpSenderType.User, 'bg-lime-500': b.source === BlurpSenderType.User}">{{
+  <div class="message bg-blue-300 rounded-3xl max-w-3xl"
+    [ngClass]="{'right': b.source === BlurpSenderType.User, 'bg-lime-500': b.source === BlurpSenderType.User, 'left': b.source === BlurpSenderType.Bot}">
+    {{
     b.message }}</div>
   }
-  @if(typingAnimation) {
-  <div class="message bg-blue-300 rounded-3xl max-w-90 typing-animation"></div>
+  @if (typingAnimation) {
+  <div class="message bg-blue-300 rounded-3xl max-w-40 typing-animation"></div>
   }
 </div>

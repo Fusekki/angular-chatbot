@@ -35,6 +35,10 @@
       justify-self: right;
     }
 
+    &.left {
+      justify-self: left;
+    }
+
     &.typing-animation:after {
       margin-left: 10px;
       font-weight: bold;
@@ -43,5 +47,6 @@
       content: ' .';
       animation: dots 1s steps(5, end) infinite;
     }
+
   }
 }
