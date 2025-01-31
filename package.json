@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:vercel": "ng add @ngx-env/builder && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
