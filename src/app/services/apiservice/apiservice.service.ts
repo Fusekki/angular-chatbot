@@ -13,6 +13,7 @@ export class ApiService {
 
   constructor() {
     this.GEMINI_API_KEY = import.meta.env['NG_APP_GEMINI_API_KEY'];
+    console.log('key: ', this.GEMINI_API_KEY)
     this.genAI = new GoogleGenerativeAI(this.GEMINI_API_KEY);
     this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
   }
