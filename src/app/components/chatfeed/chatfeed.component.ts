@@ -30,11 +30,7 @@ export class ChatfeedComponent {
       next: v => {
         this.messageService.blurps.at(-1)?.source === BlurpSenderType.User ? this.typingAnimation = true : this.typingAnimation = false;
         timer(0).subscribe(t => {
-          // console.log('here')
-          // console.log(this.messageBox.nativeElement.scrollTop )
           this.messageBox.nativeElement.scrollTop = this.messageBox.nativeElement.scrollHeight
-          // console.log(this.messageBox.nativeElement.scrollTop )
-          // console.log(this.messageBox)
         })
       },
       error: e => console.error(e),
