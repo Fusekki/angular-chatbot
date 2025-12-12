@@ -16,8 +16,8 @@ export class ApiService {
   }
 
   async sendMessage (prompt: string) {
-    const result = await this.genAI.models.generateContent({model: 'gemini-2.0-flash-001',contents: prompt});
-    return result.candidates[0].content.parts[0].text;
+    const response = await this.genAI.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
+    return response.candidates[0].content.parts[0].text;
   }
 
 }
