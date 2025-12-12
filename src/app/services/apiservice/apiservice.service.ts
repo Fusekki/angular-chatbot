@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { timer } from 'rxjs';
+import { GoogleGenAI } from '@google/genai';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,14 +11,13 @@ export class ApiService {
   GEMINI_API_KEY: string = '';
 
   constructor() {
-    this.GEMINI_API_KEY = import.meta.env['NG_APP_GEMINI_API_KEY'];
-    this.genAI = new GoogleGenerativeAI(this.GEMINI_API_KEY);
-    this.model = this.genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    this.GEMINI_API_KEY = environment.GEMINI_API_KEY;
+    this.genAI = new GoogleGenAI({apiKey: this.GEMINI_API_KEY});
   }
 
   async sendMessage (prompt: string) {
-    const result = await this.model.generateContent(prompt);
-    return result.response.text();
+    const response = await this.genAI.models.generateContent({ model: 'gemini-2.5-flash', contents: prompt });
+    return response.candidates[0].content.parts[0].text;
   }
 
 }
