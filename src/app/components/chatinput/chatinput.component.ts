@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MaterialModule, } from '../../material/material.module';
 import { FormsModule } from '@angular/forms';
-import { Blurp, BlurpSenderType } from '../../models/message.model';
+import { MessageInterface, SenderType } from '../../models/message.model';
 import { MessageService } from '../../services/message/message.service';
 import { timer } from 'rxjs';
 import { ApiService } from '../../services/apiservice/apiservice.service';
@@ -13,46 +13,60 @@ import { ApiService } from '../../services/apiservice/apiservice.service';
   styleUrl: './chatinput.component.scss',
   standalone: true
 })
-export class ChatinputComponent {
+export class ChatinputComponent implements OnInit {
 
-  blurps: Blurp[] = [];
+  MessageInterfaces: MessageInterface[] = [];
 
   constructor(private messageService: MessageService, private apiService: ApiService) {
     this.messageService.subject$.subscribe();
-    this.blurps = this.messageService.blurps;
+    this.MessageInterfaces = this.messageService.MessageInterfaces;
+    const messagesLength = this.messageService.MessageInterfaces.length;
+  }
+
+  ngOnInit() {
+    if (this.messageService.MessageInterfaces.length === 0) {
+      this.sendInitialMessage();
+    }
+  }
+
+  async sendInitialMessage() {
+    const initialMessage: MessageInterface = {
+        id: 1,
+        source: SenderType.User,
+        message: 'Hello'
+    }
+    this.messageService.subject$.next(initialMessage);
+    await this.sendMessage(initialMessage.message);
   }
 
   async onKeyDown(e: any) {
     if (e.key === 'Enter' && e.target.value) {
       e.preventDefault();
-      const blupsLength = this.messageService.blurps.length;
-      const newBlurp: Blurp = {
-          id: blupsLength + 1,
-          source: BlurpSenderType.User,
+      const messagesLength = this.messageService.MessageInterfaces.length;
+      const newMessageInterface: MessageInterface = {
+          id: messagesLength + 1,
+          source: SenderType.User,
           message: e.target.value
       }
-      this.messageService.subject$.next(newBlurp);
+      this.messageService.subject$.next(newMessageInterface);
       e.target.value = '';
-      await this.sendMessage(newBlurp.message).then(() =>
+      await this.sendMessage(newMessageInterface.message).then(() =>
         timer(0).subscribe(t => e.target.scrollTop = e.target.scrollHeight)
       );
     }
   }
 
 
-  BlurpSenderType = BlurpSenderType;
+  SenderType = SenderType;
 
   async sendMessage(prompt: string) {
     await this.apiService.sendMessage(prompt).then(res => {
-      const newBlurp: Blurp = {
-        id: this.blurps.length + 1,
-        source: BlurpSenderType.Bot,
+      const newMessageInterface: MessageInterface = {
+        id: this.MessageInterfaces.length + 1,
+        source: SenderType.Bot,
         message: res
       };
-      const delay = Math.floor(Math.random() * (5000 - 1000 + 1) + 1000);
-      timer(delay).subscribe(() => {
-        this.messageService.subject$.next(newBlurp)
-      })
+      this.messageService.subject$.next(newMessageInterface)
     });
   }
 }

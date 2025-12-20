@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Blurp, BlurpSenderType } from '../../models/message.model';
+import { MessageInterface, SenderType } from '../../models/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,36 +20,36 @@ export class MessageService {
     }
   }
 
-  initialBlurps: Blurp[] = [
-    {
-        id: 1,
-        source: BlurpSenderType.Bot,
-        message: `Hi there! How can I help you today?`
-    },
+  initialMessageInterfaces: MessageInterface[] = [
+    // {
+    //     id: 1,
+    //     source: SenderType.User,
+    //     message: `Hello`
+    // },
     // {
     //     id: 2,
-    //     source: BlurpSenderType.User,
+    //     source: SenderType.User,
     //     message: 'Hi I need help'
     // },
     // {
     //     id: 3,
-    //     source: BlurpSenderType.Bot,
+    //     source: SenderType.Bot,
     //     message: 'Sure. What may I help you with?'
     // },
     // {
     //     id: 4,
-    //     source: BlurpSenderType.User,
+    //     source: SenderType.User,
     //     message: 'What is 2 + 2?'
     // },
   ];
 
-  public subject$ = new Subject<Blurp>();
-  public blurps: Blurp[] = this.initialBlurps;
+  public subject$ = new Subject<MessageInterface>();
+  public MessageInterfaces: MessageInterface[] = this.initialMessageInterfaces;
 
   constructor() {
     this.subject$
     .subscribe({
-      next: v => this.blurps.push(v),
+      next: v => this.MessageInterfaces.push(v),
       error: e => console.error(e),
       complete: () => console.log('subject$ got a complete notification')
     });

@@ -1,10 +1,10 @@
-export enum BlurpSenderType {
+export enum SenderType {
   Bot = 'bot',
   User = 'user'
 }
 
-export interface Blurp {
+export interface MessageInterface {
   id: number;
-  source: BlurpSenderType;
+  source: SenderType;
   message: string;
 }
