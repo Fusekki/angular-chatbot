@@ -5,7 +5,7 @@ import { ChatfeedComponent } from '../chatfeed/chatfeed.component';
 
 @Component({
   selector: 'app-layout',
-  imports: [HeaderComponent, ChatinputComponent],
+  imports: [HeaderComponent, ChatinputComponent, ChatfeedComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
   standalone: true

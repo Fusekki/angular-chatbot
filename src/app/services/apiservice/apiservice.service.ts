@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
+// import { environment } from '../../../environments/environment.development';
 import { GoogleGenAI } from '@google/genai';
 @Injectable({
   providedIn: 'root'
@@ -8,11 +8,11 @@ export class ApiService {
   model: any;
   genAI: any;
 
-  GEMINI_API_KEY: string = '';
-
   constructor() {
-    this.GEMINI_API_KEY = environment.GEMINI_API_KEY;
-    this.genAI = new GoogleGenAI({apiKey: this.GEMINI_API_KEY});
+    const GEMINI_API_KEY = import.meta.env['NG_APP_GEMINI_API_KEY'];
+    this.genAI = new GoogleGenAI({apiKey: GEMINI_API_KEY});
+        console.log('this.GEMINI_API_KEY:', GEMINI_API_KEY);
+    console.log('this.genAI:', this.genAI);
   }
 
   async sendMessage (prompt: string) {
